@@ -16,3 +16,4 @@ dist
 .tmp
 .log
 .vscode-test
+db.json
