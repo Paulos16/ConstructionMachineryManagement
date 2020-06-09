@@ -70,7 +70,7 @@ server.on('uncaughtException', function (req, res, route, error) {
 
 server.post('/api/auth/login', AuthController.login);
 server.get('/api/rodzajeMaszyn', MachinesController.getMachinesTypes);
-server.post('/api/wnioski', AuthController.login);
+server.put('/api/wnioski', ApplicationsController.addApplication);
 server.get('/api/wnioski', AuthController.login);
 server.patch('/api/wnioski', AuthController.login);
 server.put('/api/maszyny', AuthController.login);

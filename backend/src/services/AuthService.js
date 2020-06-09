@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-const db = require('../interfaces/Database');
+const db = require('../application/Database');
 
 
 const TOKEN_SECRET = 'aYbH4H2yUk92JkOp4K'
