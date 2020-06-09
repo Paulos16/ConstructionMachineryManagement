@@ -38,12 +38,12 @@ server.use(restify.plugins.bodyParser({
 }));
 
 server.pre(function(req, res, next) {
-  if(req.path() != '/auth/login') {
+  if(req.path() != '/api/auth/login') {
     if(req.header('Authorization') === undefined || !req.header('Authorization').startsWith('Bearer ') || req.header('Authorization') <= 7) {
       res.send(401);
       return next(new Error('Unauthorized'));
     } else {
-      if(!AuthService.isTokenOK(req.header('Authorization').split(' ')[1])) {
+      if(!AuthService.verifyToken(req.header('Authorization').split(' ')[1])) {
         res.send(401);
         return next(new Error('Unauthorized'));
       }
@@ -64,10 +64,24 @@ server.on('uncaughtException', function (req, res, route, error) {
   res.send(500, 'Internal server error');
 });
 
-server.post('/auth/login', AuthController.login);
-server.get('/test', (req, res, next) => {
-  res.send(200, 'Hello!');
+server.post('/api/auth/login', AuthController.login);
+server.get('/api/rodzajeMaszyn', (req, res, next) => {
+  res.send(200, 'Hello');
   next();
 });
+server.post('/api/wnioski', AuthController.login);
+server.get('/api/wnioski', AuthController.login);
+server.patch('/api/wnioski', AuthController.login);
+server.put('/api/maszyny', AuthController.login);
+server.get('/api/maszyny', AuthController.login);
+server.get('/api/definicje', AuthController.login);
+server.put('/api/zleceniaDefinicji', AuthController.login);
+server.get('/api/zleceniaDefinicji', AuthController.login);
+server.put('/api/definicje', AuthController.login);
+server.put('/api/przeglady', AuthController.login);
+server.put('/api/rodzajePrzegladow', AuthController.login);
+server.patch('/api/przeglady', AuthController.login);
+server.post('/api/przeglady', AuthController.login);
+server.patch('/api/maszyny', AuthController.login);
 
 server.listen(5000, () =>  console.log('%s listening at %s\n', server.name, server.url));
