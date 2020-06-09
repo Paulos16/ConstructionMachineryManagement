@@ -3,8 +3,12 @@ const corsMiddleware = require('restify-cors-middleware');
 const moment = require('moment');
 
 const AuthController = require('./controllers/AuthController');
-const AuthService = require('./services/AuthService');
+const MachinesController = require('./controllers/MachinesController');
+const ApplicationsController = require('./controllers/ApplicationsController');
+const DefinitionsController = require('./controllers/DefinitionsController');
+const OverwievsController = require('./controllers/OverwievsController');
 
+const AuthService = require('./services/AuthService');
 
 const cors = corsMiddleware({
   origins: ['*'],
@@ -65,10 +69,7 @@ server.on('uncaughtException', function (req, res, route, error) {
 });
 
 server.post('/api/auth/login', AuthController.login);
-server.get('/api/rodzajeMaszyn', (req, res, next) => {
-  res.send(200, 'Hello');
-  next();
-});
+server.get('/api/rodzajeMaszyn', MachinesController.getMachinesTypes);
 server.post('/api/wnioski', AuthController.login);
 server.get('/api/wnioski', AuthController.login);
 server.patch('/api/wnioski', AuthController.login);
