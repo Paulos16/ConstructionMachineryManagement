@@ -17,3 +17,4 @@ dist
 .log
 .vscode-test
 db.json
+.DS_Store
