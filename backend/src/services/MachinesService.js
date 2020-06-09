@@ -35,5 +35,18 @@ module.exports = function() {
 
     return machines;
   }
+
+  this.setNextOverviewDate = function(machineId, nextDate) {
+
+    const machine = db.get('machines')
+      .filter((m) => m.IdMaszyna === machineId)
+      .value();
+    
+    machine.TerminWaznosciPrzegladu = nextDate;
+
+    db.write();
+
+    return machines;
+  }
   
 }

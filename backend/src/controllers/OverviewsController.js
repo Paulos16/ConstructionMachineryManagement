@@ -50,3 +50,37 @@ module.exports.addOverviewTask = function(req, res, next) {
   res.send(200, result);
   next();
 }
+
+module.exports.addOverviewToCorrect = function(req, res, next) {
+  if(!(req.body !== undefined &&
+    req.body.Dokument !== undefined &&
+    req.body.IdPrzeglad !== undefined)) {
+    
+    res.send(400);
+    next();
+    return;
+  }
+
+  const service = new OverviewsService();
+  const result = service.addOverviewToCorrect(req.body.IdPrzeglad, req.body.Dokument);
+  
+  res.send(200, result);
+  next();
+}
+
+module.exports.addCorrectOverview = function(req, res, next) {
+  if(!(req.body !== undefined &&
+    req.body.Dokument !== undefined &&
+    req.body.IdPrzeglad !== undefined)) {
+    
+    res.send(400);
+    next();
+    return;
+  }
+
+  const service = new OverviewsService();
+  const result = service.addCorrectOverview(req.body.IdPrzeglad, req.body.Dokument);
+  
+  res.send(200, result);
+  next();
+}

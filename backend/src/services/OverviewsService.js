@@ -30,5 +30,32 @@ module.exports = function() {
 
     return overviewTask;
   }
+
+  this.addOverviewToCorrect = function(overviewId, document) {
+
+    const overview = db.get('overviews')
+      .find((o) => o.IdPrzeglad === overviewId)
+      .value();
+    
+    overwiev.DokumentPrzegladu = document;
+    
+    db.write();
+
+    return overwiev;
+  }
+
+  this.addCorrectOverview = function(overviewId, document) {
+
+    const overview = db.get('overviews')
+      .find((o) => o.IdPrzeglad === overviewId)
+      .value();
+    
+    overwiev.DokumentPrzegladu = document;
+    overwiev.CzyZrobiony = true;
+    
+    db.write();
+
+    return overwiev;
+  }
   
 }

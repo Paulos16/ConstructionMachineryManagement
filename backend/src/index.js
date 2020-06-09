@@ -83,8 +83,8 @@ server.get('/api/zleceniaDefinicji', DefinitionsController.getDefinitionTask);
 server.put('/api/definicje', DefinitionsController.addDefinition);
 server.put('/api/przeglady', OverviewsController.addOverview);
 server.put('/api/zleceniaPrzegladow', OverviewsController.addOverviewTask);
-server.patch('/api/przeglady', OverviewsController.addOverviewTask);
-server.post('/api/przeglady', AuthController.login);
-server.patch('/api/maszyny', AuthController.login);
+server.post('/api/przeglady', OverviewsController.addOverviewToCorrect);
+server.patch('/api/przeglady', OverviewsController.addCorrectOverview);
+server.post('/api/maszyny', MachinesController.setNextOverviewDate);
 
 server.listen(5000, () =>  console.log('%s listening at %s\n', server.name, server.url));

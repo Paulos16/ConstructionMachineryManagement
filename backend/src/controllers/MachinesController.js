@@ -50,3 +50,21 @@ module.exports.getMachines = function(req, res, next) {
   res.send(200, result);
   next();
 }
+
+module.exports.setNextOverviewDate = function(req, res, next) {
+
+  if(!(req.body !== undefined &&
+    req.body.IdMaszyna !== undefined &&
+    req.body.TerminNastepnegoPrzegladu !== undefined)) {
+    
+    res.send(400);
+    next();
+    return;
+  }
+
+  const service = new MachinesService();
+  const result = service.setNextOverviewDate(req.body.IdMaszyna, req.body.TerminNastepnegoPrzegladu);
+  
+  res.send(200, result);
+  next();
+}
