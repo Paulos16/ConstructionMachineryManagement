@@ -11,8 +11,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  loading = false;
-  submitted = false;
+  loginFailed: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -20,37 +19,34 @@ export class LoginComponent implements OnInit {
     private authenticationService: AuthenticationService
   ) {
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/' + this.authenticationService.currentUserValue.Role]);
+      this.router.navigate(['/']);
     }
   }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+     username: ['', Validators.required],
+     password: ['', Validators.required]
     })
   }
 
-  get f() { return this.loginForm.controls; }
-
   onSubmit() {
-    this.submitted = true;
+    this.loginFailed = false;
 
     if (this.loginForm.invalid) {
       return;
     }
 
-    this.loading = true;
-    this.authenticationService.login(this.f.username.value, this.f.password.value)
+    this.authenticationService.login(this.loginForm.get('username').value, this.loginForm.get('password').value)
       .pipe(first())
       .subscribe(
         data => {
-          this.router.navigate(['/' + data.Role]);
+          this.router.navigate(['/']);
         },
         error => {
-          alert("Logowanie nie powiodło się.");
-          this.loading = false;
+          alert('Logowanie nie powiodło się.');
+          this.loginFailed = true;
         }
-      )
+      );
   }
 }

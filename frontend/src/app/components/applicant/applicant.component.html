@@ -1,0 +1,26 @@
+<mat-card>
+    <mat-card-title>Wniosek</mat-card-title>
+    <mat-card-subtitle>o przeprowadzenie przeglądu maszyny budowlanej</mat-card-subtitle>
+    <mat-error *ngIf="applicationSendingFailed">Przesłanie wniosku nie powiodło się!</mat-error>
+    <mat-card-content>
+        <form [formGroup]="applicationForm" (ngSubmit)="onSubmit()">
+            <mat-form-field class="full-width-input">
+                <mat-select placeholder="Rodzaj maszyny" formControlName="machineType" required>
+                    <mat-option *ngFor="let type of machineTypes" value="{{ type.IdRodzajMaszyny }}">{{ type.Nazwa }}</mat-option>
+                </mat-select>
+                <mat-error>Wybierz rodzaj maszyny</mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width-input">
+                <input matInput type="text" placeholder="Numer rejestracyjny maszyny" formControlName="licenseNumber" required>
+                <mat-error>Podaj numer rejestracyjny maszyny</mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width-input">
+                <textarea matInput placeholder="Treść wniosku..." formControlName="content" required></textarea>
+                <mat-error>Napisz treść wniosku</mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary">
+                Złóz wniosek
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>

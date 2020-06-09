@@ -2,25 +2,34 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ApplicantComponent } from './applicant/applicant.component';
-import { InspectorComponent } from './inspector/inspector.component';
-import { LoginComponent } from './login/login.component';
-import { OfficeComponent } from './office/office.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HomeComponent } from './home/home.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
+
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+
+import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
+import { ApplicantComponent } from './components/applicant/applicant.component';
+import { OfficeComponent } from './components/office/office.component';
+import { InspectorComponent } from './components/inspector/inspector.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ApplicantComponent,
-    InspectorComponent,
     LoginComponent,
+    HomeComponent,
+    ApplicantComponent,
     OfficeComponent,
-    HomeComponent
+    InspectorComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,7 +37,14 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatSelectModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }

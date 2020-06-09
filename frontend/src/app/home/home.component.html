@@ -1,1 +1,19 @@
-<p>home works!</p>
+<mat-toolbar color="primary">
+    <span>{{ currentUser.role | titlecase }}</span>
+    <span style="flex: 1 1 auto;"></span>
+    <span><button mat-mini-fab color="accent" aria-label="Logout menu button" (click)="logout()">
+        <mat-icon>power_settings_new</mat-icon>
+    </button></span>
+</mat-toolbar>
+
+<div *ngIf="currentUser.role === 'applicant'">
+    <app-applicant></app-applicant>
+</div>
+
+<div *ngIf="currentUser.role === 'office'">
+    <app-office></app-office>
+</div>
+
+<div *ngIf="currentUser.role === 'inspector'">
+    <app-inspector></app-inspector>
+</div>
