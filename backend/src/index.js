@@ -71,9 +71,9 @@ server.on('uncaughtException', function (req, res, route, error) {
 server.post('/api/auth/login', AuthController.login);
 server.get('/api/rodzajeMaszyn', MachinesController.getMachinesTypes);
 server.put('/api/wnioski', ApplicationsController.addApplication);
-server.get('/api/wnioski', AuthController.login);
-server.patch('/api/wnioski', AuthController.login);
-server.put('/api/maszyny', AuthController.login);
+server.get('/api/wnioski', ApplicationsController.getApplications);
+server.patch('/api/wnioski', ApplicationsController.setApplicationApproval);
+server.put('/api/maszyny', MachinesController.addMachine);
 server.get('/api/maszyny', AuthController.login);
 server.get('/api/definicje', AuthController.login);
 server.put('/api/zleceniaDefinicji', AuthController.login);
