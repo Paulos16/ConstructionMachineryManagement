@@ -1,4 +1,7 @@
+const moment = require('moment');
+
 const db = require('../application/Database');
+
 
 module.exports = function() {
 
@@ -22,6 +25,15 @@ module.exports = function() {
     db.write();
 
     return machine;
+  }
+
+  this.getMachines = function(date) {
+
+    const machines = db.get('machines')
+      .filter((m) => moment(m.TerminWaznosciPrzegladu).isBefore(date))
+      .value();
+
+    return machines;
   }
   
 }

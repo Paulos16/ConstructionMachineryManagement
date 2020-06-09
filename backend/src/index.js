@@ -6,7 +6,7 @@ const AuthController = require('./controllers/AuthController');
 const MachinesController = require('./controllers/MachinesController');
 const ApplicationsController = require('./controllers/ApplicationsController');
 const DefinitionsController = require('./controllers/DefinitionsController');
-const OverwievsController = require('./controllers/OverwievsController');
+const OverviewsController = require('./controllers/OverviewsController');
 
 const AuthService = require('./services/AuthService');
 
@@ -41,6 +41,8 @@ server.use(restify.plugins.bodyParser({
   maxFieldsSize: 2 * 1024 * 1024
 }));
 
+server.use(restify.plugins.queryParser());
+
 server.pre(function(req, res, next) {
   if(req.path() != '/api/auth/login') {
     if(req.header('Authorization') === undefined || !req.header('Authorization').startsWith('Bearer ') || req.header('Authorization') <= 7) {
@@ -74,14 +76,14 @@ server.put('/api/wnioski', ApplicationsController.addApplication);
 server.get('/api/wnioski', ApplicationsController.getApplications);
 server.patch('/api/wnioski', ApplicationsController.setApplicationApproval);
 server.put('/api/maszyny', MachinesController.addMachine);
-server.get('/api/maszyny', AuthController.login);
-server.get('/api/definicje', AuthController.login);
-server.put('/api/zleceniaDefinicji', AuthController.login);
-server.get('/api/zleceniaDefinicji', AuthController.login);
-server.put('/api/definicje', AuthController.login);
-server.put('/api/przeglady', AuthController.login);
-server.put('/api/rodzajePrzegladow', AuthController.login);
-server.patch('/api/przeglady', AuthController.login);
+server.get('/api/maszyny', MachinesController.getMachines);
+server.get('/api/definicje', DefinitionsController.getDefinitions);
+server.put('/api/zleceniaDefinicji', DefinitionsController.addDefinitionTask);
+server.get('/api/zleceniaDefinicji', DefinitionsController.getDefinitionTask);
+server.put('/api/definicje', DefinitionsController.addDefinition);
+server.put('/api/przeglady', OverviewsController.addOverview);
+server.put('/api/zleceniaPrzegladow', OverviewsController.addOverviewTask);
+server.patch('/api/przeglady', OverviewsController.addOverviewTask);
 server.post('/api/przeglady', AuthController.login);
 server.patch('/api/maszyny', AuthController.login);
 
