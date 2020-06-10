@@ -3,10 +3,9 @@ const db = require('../application/Database');
 
 module.exports = function() {
 
-  this.getDefinitions = function(idRodzajMaszyny) {
+  this.getDefinitions = function() {
 
     const definitions = db.get('definitions')
-      .filter((d) => d.IdRodzajMaszyny == idRodzajMaszyny)
       .value();
 
     return definitions;
