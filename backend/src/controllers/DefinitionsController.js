@@ -4,16 +4,9 @@ const DefinitionsService = require('../services/DefinitionsService');
 
 
 module.exports.getDefinitions = function(req, res, next) {
-  if(!(req.query !== undefined &&
-    req.query.IdRodzajMaszyny !== undefined)) {
-    
-    res.send(400);
-    next();
-    return;
-  }
 
   const service = new DefinitionsService();
-  const result = service.getDefinitions(req.query.IdRodzajMaszyny);
+  const result = service.getDefinitions();
   
   res.send(200, result);
   next();
