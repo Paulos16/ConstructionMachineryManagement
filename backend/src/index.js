@@ -61,7 +61,7 @@ server.pre(function(req, res, next) {
 
 server.on('after', function (req, res, route, error) {
   if(req !== undefined && req.route !== undefined && req.route.method !== undefined) {
-    console.log(`[${moment().format('hh:mm:ss')}] ${req.route.method}\t${req.path()}` + (res.statusCode === undefined ? '' : `\tstatus: ${res.statusCode}`));
+    console.log(`[${moment().format('HH:mm:ss')}] ${req.route.method}\t${req.path()}` + (res.statusCode === undefined ? '' : `\tstatus: ${res.statusCode}`));
   }
 });
 
