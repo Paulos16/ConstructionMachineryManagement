@@ -21,6 +21,7 @@ import { HomeComponent } from './home/home.component';
 import { ApplicantComponent } from './components/applicant/applicant.component';
 import { OfficeComponent } from './components/office/office.component';
 import { InspectorComponent } from './components/inspector/inspector.component';
+import { ApplicationsComponent } from './components/office/applications/applications.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { InspectorComponent } from './components/inspector/inspector.component';
     ApplicantComponent,
     OfficeComponent,
     InspectorComponent,
+    ApplicationsComponent,
   ],
   imports: [
     BrowserModule,

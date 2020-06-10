@@ -1,1 +1,29 @@
-<p>office works!</p>
+<mat-toolbar color="primary">
+    <span class="menu-spacer">
+        <div>
+            <a mat-button (click)="selectTab(0)">Maszyny</a>
+            <a mat-button (click)="selectTab(1)">Rodzaje maszyn</a>
+            <a mat-button (click)="selectTab(2)">Wnioski</a>
+            <a mat-button (click)="selectTab(3)">Definicje zadań przeglądowych</a>
+            <a mat-button (click)="selectTab(4)">Zadania przeglądowe</a>
+        </div>
+    </span>
+</mat-toolbar>
+
+<mat-card>
+    <div *ngIf="selectedTab === 'machines'">
+        <p>Maszyny...</p>
+    </div>
+    <div *ngIf="selectedTab === 'machine-types'">
+        <p>Rodzaje maszyn...</p>
+    </div>
+    <div *ngIf="selectedTab === 'applications'">
+        <app-applications></app-applications>
+    </div>
+    <div *ngIf="selectedTab === 'definitions'">
+        <p>Definicje...</p>
+    </div>
+    <div *ngIf="selectedTab === 'inspections'">
+        <p>Przeglądy...</p>
+    </div>
+</mat-card>

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ApplicantService } from './../../services/applicant.service';
+import { MachineTypesService } from 'src/app/services/machine-types.service';
+import { ApplicationsService } from '../../services/applications.service';
 import { MachineType } from './../../models/machine-type';
+import { Application } from './../../models/application';
 
 @Component({
   selector: 'app-applicant',
@@ -16,7 +18,8 @@ export class ApplicantComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private applicantService: ApplicantService
+    private machineTypesService: MachineTypesService,
+    private applicationsService: ApplicationsService
   ) { }
 
   ngOnInit(): void {
@@ -30,7 +33,7 @@ export class ApplicantComponent implements OnInit {
   }
 
   getMachineTypes(): void {
-    this.applicantService.getMachineTypes()
+    this.machineTypesService.getMachineTypes()
       .subscribe(machineTypes => this.machineTypes = machineTypes);
   }
 
@@ -41,16 +44,10 @@ export class ApplicantComponent implements OnInit {
       return;
     }
 
-    // this.authenticationService.login(this.loginForm.get('username').value, this.loginForm.get('password').value)
-    //   .pipe(first())
-    //   .subscribe(
-    //     data => {
-    //       this.router.navigate(['/']);
-    //     },
-    //     error => {
-    //       alert('Logowanie nie powiodło się.');
-    //       this.loginFailed = true;
-    //     }
-    //   );
+    this.applicationsService.addNewApplication(
+      this.applicationForm.get('machineType').value,
+      this.applicationForm.get('licenseNumber').value,
+      this.applicationForm.get('content').value
+    );
   }
 }
