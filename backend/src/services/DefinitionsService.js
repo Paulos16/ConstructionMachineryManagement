@@ -15,7 +15,8 @@ module.exports = function() {
   this.addDefinitionTask = function(definitionTask) {
 
     const definitionTasks = db.get('definitionTask').value()
-    db.set('definitionTaskCount', db.get('definitionTaskCount').value()+1).write();
+    db.set('definitionTaskCount', db.get('definitionTaskCount').value()+1)
+      .write();
 
     const definitionTasksCount = db.get('definitionTaskCount').value()
     definitionTask.IdZlecenieDefinicji = definitionTasksCount;
@@ -37,7 +38,8 @@ module.exports = function() {
   this.addDefinition = function(definition) {
 
     const definitions = db.get('definitions').value()
-    db.set('definitionsCount', db.get('definitionsCount').value()+1).write();
+    db.set('definitionsCount', db.get('definitionsCount').value()+1)
+      .write();
 
     const definitionsCount = db.get('definitionsCount').value()
     definition.IdDefinicja = definitionsCount;

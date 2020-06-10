@@ -5,11 +5,10 @@ module.exports = function() {
   this.addApplication = function(application) {
 
     const applications = db.get('applications').value()
-    db.get('applicationsCount')
-      .assign(db.get('applicationsCount').value()+1)
+    db.set('applicationsCount', db.get('applicationsCount').value()+1)
       .write();
 
-    const applicationsCount = db.get('applicationsCount').value()
+    const applicationsCount = db.get('applicationsCount').value();
     application.IdWniosek = applicationsCount;
     
     applications.push(application);
