@@ -22,8 +22,9 @@ export class ApplicationsService {
   }
 
   addNewApplication(idRodzajMaszyny: number, rejestracja: string, tresc: string): Observable<Application> {
-    let application = { rejestracja: rejestracja, tresc: tresc, idRodzajMaszyny: idRodzajMaszyny };
+    let application = { Rejestracja: rejestracja, Tresc: tresc, IdRodzajMaszyny: idRodzajMaszyny };
 
+    console.log(application);
     return this.http.put<Application>(this.applicationsUrl, application)
       .pipe(
         tap(() => alert('Wniosek przesłany pomyślnie.')),
@@ -43,6 +44,7 @@ export class ApplicationsService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
+      alert('Error: ' + error);
       return of(result as T);
     }
   }

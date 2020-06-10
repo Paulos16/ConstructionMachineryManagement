@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MachineTypesService } from 'src/app/services/machine-types.service';
 import { ApplicationsService } from '../../services/applications.service';
 import { MachineType } from './../../models/machine-type';
-import { Application } from './../../models/application';
 
 @Component({
   selector: 'app-applicant',
@@ -38,9 +37,11 @@ export class ApplicantComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log('btn pressed');
     this.applicationSendingFailed = false;
 
     if (this.applicationForm.invalid) {
+      this.applicationSendingFailed = true;
       return;
     }
 
