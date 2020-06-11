@@ -3,6 +3,14 @@ const db = require('../application/Database');
 
 module.exports = function() {
 
+  this.getOverviews = function() {
+
+    const overviews = db.get('overviews')
+      .value();
+
+    return overviews;
+  }
+
   this.addOverview = function(overview) {
 
     const overviews = db.get('overviews').value()

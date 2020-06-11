@@ -3,6 +3,14 @@ const moment = require('moment');
 const OverviewsService = require('../services/OverviewsService');
 
 
+module.exports.getOverviews = function(req, res, next) {
+
+  const service = new OverwievsService();
+  
+  res.send(200, service.getOverviews());
+  next();
+}
+
 module.exports.addOverview = function(req, res, next) {
   if(!(req.body !== undefined &&
     req.body.IdMaszyna !== undefined &&
