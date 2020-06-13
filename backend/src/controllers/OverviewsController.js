@@ -5,7 +5,7 @@ const OverviewsService = require('../services/OverviewsService');
 
 module.exports.getOverviews = function(req, res, next) {
 
-  const service = new OverwievsService();
+  const service = new OverviewsService();
   
   res.send(200, service.getOverviews());
   next();
