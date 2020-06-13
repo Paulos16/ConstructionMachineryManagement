@@ -49,5 +49,22 @@ module.exports = function() {
 
     return machines;
   }
+
+  this.setMachineApproval = function(machineId, approval) {
+
+    const machine = db.get('machines')
+      .filter((m) => m.IdMaszyna === machineId)
+      .value();
+    
+    if(machine === undefined) {
+      return null;
+    }
+    
+    machine.CzyZdatna = approval;
+
+    db.write();
+
+    return machines;
+  }
   
 }

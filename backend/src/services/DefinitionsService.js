@@ -48,5 +48,21 @@ module.exports = function() {
 
     return definition;
   }
+
+  this.addDefinitionDocument = function(machineType, document) {
+
+    const definition = db.get('definitions')
+      .filter((def) => def.IdRodzajMaszyny === machineType)
+      .value()
+    
+    if(definition === undefined) {
+      return null;
+    }
+    
+    definition.DokumentDefinicji = document
+    db.write();
+
+    return definition;
+  }
   
 }

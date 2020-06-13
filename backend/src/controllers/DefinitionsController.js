@@ -65,3 +65,26 @@ module.exports.addDefinition = function(req, res, next) {
   res.send(200, result);
   next();
 }
+
+module.exports.addDefinitionDocument = function(req, res, next) {
+  if(!(req.body !== undefined &&
+    req.body.IdRodzajMaszyny !== undefined &&
+    req.body.Dokument !== undefined)) {
+    
+    res.send(400);
+    next();
+    return;
+  }
+
+  const service = new DefinitionsService();
+  const result = service.addDefinitionDocument(req.body.IdRodzajMaszyny, req.body.Dokument);
+
+  if( result === null) {
+    res.send(406);
+    next();
+    return;  
+  }
+  
+  res.send(200, result);
+  next();
+}

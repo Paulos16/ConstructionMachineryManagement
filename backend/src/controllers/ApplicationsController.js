@@ -19,7 +19,8 @@ module.exports.addApplication = function(req, res, next) {
     Rejestracja: req.body.Rejestracja,
     CzyPoprawny: null,
     IdRodzajMaszyny: req.body.IdRodzajMaszyny,
-    IdZleceniaDefinicji: null
+    IdZleceniaDefinicji: null,
+    Status: null
   }
 
   const service = new ApplicationsService();
@@ -48,6 +49,30 @@ module.exports.setApplicationApproval = function(req, res, next) {
 
   const service = new ApplicationsService();
   const result = service.setApplicationApproval(req.body.IdWniosek, req.body.CzyPoprawny);
+
+  if( result === null) {
+    res.send(406);
+    next();
+    return;  
+  }
+
+  res.send(200, result);
+  next();
+}
+
+module.exports.setApplicationStatus = function(req, res, next) {
+
+  if(!(req.body !== undefined &&
+    req.body.IdWniosek !== undefined &&
+    req.body.Status !== undefined)) {
+    
+    res.send(400);
+    next();
+    return;
+  }
+
+  const service = new ApplicationsService();
+  const result = service.setApplicationStatus(req.body.IdWniosek, req.body.Status);
 
   if( result === null) {
     res.send(406);

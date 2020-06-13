@@ -40,5 +40,21 @@ module.exports = function() {
 
     return application;
   }
+
+  this.setApplicationStatus = function(applicationId, status) {
+
+    const application = db.get('applications')
+      .find((a) => a.IdWniosek === applicationId)
+      .value();
+    
+    if(application === undefined) {
+      return null;
+    }
+
+    application.Status = status;
+    db.write();
+
+    return application;
+  }
   
 }
