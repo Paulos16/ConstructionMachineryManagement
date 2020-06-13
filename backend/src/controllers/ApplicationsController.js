@@ -20,7 +20,7 @@ module.exports.addApplication = function(req, res, next) {
     CzyPoprawny: null,
     IdRodzajMaszyny: req.body.IdRodzajMaszyny,
     IdZleceniaDefinicji: null,
-    Status: null
+    Status: 'Wysłany'
   }
 
   const service = new ApplicationsService();
