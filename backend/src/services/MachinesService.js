@@ -31,7 +31,7 @@ module.exports = function() {
   this.getMachines = function(date) {
 
     const machines = db.get('machines')
-      .filter((m) => moment(m.TerminWaznosciPrzegladu).isBefore(date))
+      .filter((m) => moment(m.TerminWaznosciPrzegladu).isSameOrBefore(date))
       .value();
 
     return machines;
