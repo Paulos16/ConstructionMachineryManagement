@@ -12,18 +12,18 @@
 
 <div class="role-content">
     <div *ngIf="selectedTab === 'machines'">
-        <p>Maszyny...</p>
+        <app-machines></app-machines>
     </div>
     <div *ngIf="selectedTab === 'machine-types'">
-        <p>Rodzaje maszyn...</p>
+        <app-machine-types></app-machine-types>
     </div>
     <div *ngIf="selectedTab === 'applications'">
         <app-applications></app-applications>
     </div>
     <div *ngIf="selectedTab === 'definitions'">
-        <p>Definicje...</p>
+        <app-definitions></app-definitions>
     </div>
     <div *ngIf="selectedTab === 'inspections'">
-        <p>Przeglądy...</p>
+        <app-inspections></app-inspections>
     </div>
 </div>

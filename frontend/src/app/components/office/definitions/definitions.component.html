@@ -1,0 +1,42 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="IdDefinicja">
+        <th mat-header-cell *matHeaderCellDef>Numer definicji zadań przeglądowych</th>
+        <td mat-cell *matCellDef="let element">{{element.IdDefinicja}}</td>
+    </ng-container>
+  
+    <ng-container matColumnDef="RodzajMaszyny">
+        <th mat-header-cell *matHeaderCellDef>Rodzaj maszyny</th>
+        <td mat-cell *matCellDef="let element">{{element.IdRodzajMaszyny}}</td>
+    </ng-container>
+  
+    <ng-container matColumnDef="DokumentDefinicji">
+        <th mat-header-cell *matHeaderCellDef>Dokument definicji zadań przeglądowych</th>
+        <td mat-cell *matCellDef="let element">{{element.DokumentDefinicji}}</td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-card>
+    <mat-card-title>Dokument definicji zadań przeglądowych</mat-card-title>
+    <mat-error *ngIf="definitionSendingFailed">Przesłanie dokumentu nie powiodło się!</mat-error>
+    <mat-card-content>
+        <form [formGroup]="definitionForm" (ngSubmit)="onSubmit()">
+            <mat-form-field class="full-width-input">
+                <mat-select placeholder="Rodzaj maszyny" formControlName="machineType" required>
+                    <mat-option *ngFor="let type of machineTypes" value="{{ type.IdRodzajMaszyny }}">{{ type.Nazwa }}</mat-option>
+                </mat-select>
+                <mat-error>Wybierz rodzaj maszyny</mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width-input">
+                <textarea matInput placeholder="Treść dokumentu..." formControlName="definitionDocument" required></textarea>
+                <mat-error>Napisz treść dokumentu</mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary">
+                Prześlij dokument
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>

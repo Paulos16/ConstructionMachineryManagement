@@ -1,0 +1,47 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="IdPrzeglad">
+        <th mat-header-cell *matHeaderCellDef>Numer zadania przeglądowego</th>
+        <td mat-cell *matCellDef="let element">{{element.IdPrzeglad}}</td>
+    </ng-container>
+  
+    <ng-container matColumnDef="Maszyna">
+        <th mat-header-cell *matHeaderCellDef>Rejestracja maszyny</th>
+        <td mat-cell *matCellDef="let element">{{element.IdMaszyna | machineName:machines}}</td>
+    </ng-container>
+  
+    <ng-container matColumnDef="DokumentPrzegladu">
+        <th mat-header-cell *matHeaderCellDef>Dokument zadania przeglądowego</th>
+        <td mat-cell *matCellDef="let element">{{element.DokumentPrzegladu}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="CzyZrobiony">
+        <th mat-header-cell *matHeaderCellDef>Przegląd zatwierdzony</th>
+        <td mat-cell *matCellDef="let element">{{element.CzyZrobiony}}</td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-card>
+    <mat-card-title>Dokument zadania przeglądowego</mat-card-title>
+    <mat-error *ngIf="inspectionSendingFailed">Przesłanie dokumentu nie powiodło się!</mat-error>
+    <mat-card-content>
+        <form [formGroup]="inspectionForm" (ngSubmit)="onSubmit()">
+            <mat-form-field class="full-width-input">
+                <mat-select placeholder="Rejestracja maszyny" formControlName="machine" required>
+                    <mat-option *ngFor="let type of machines" value="{{ type.IdMaszyna }}">{{ type.Rejestracja }}</mat-option>
+                </mat-select>
+                <mat-error>Wybierz rejestrację maszyny</mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width-input">
+                <textarea matInput placeholder="Treść dokumentu..." formControlName="inspectionDocument" required></textarea>
+                <mat-error>Napisz treść dokumentu</mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary">
+                Prześlij dokument
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>

@@ -24,6 +24,12 @@ import { ApplicantComponent } from './components/applicant/applicant.component';
 import { OfficeComponent } from './components/office/office.component';
 import { InspectorComponent } from './components/inspector/inspector.component';
 import { ApplicationsComponent } from './components/office/applications/applications.component';
+import { MachineTypePipe } from './pipes/machine-type.pipe';
+import { DefinitionsComponent } from './components/office/definitions/definitions.component';
+import { InspectionsComponent } from './components/office/inspections/inspections.component';
+import { MachinePipe } from './pipes/machine.pipe';
+import { MachinesComponent } from './components/office/machines/machines.component';
+import { MachineTypesComponent } from './components/office/machine-types/machine-types.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +40,12 @@ import { ApplicationsComponent } from './components/office/applications/applicat
     OfficeComponent,
     InspectorComponent,
     ApplicationsComponent,
+    MachineTypePipe,
+    DefinitionsComponent,
+    InspectionsComponent,
+    MachinePipe,
+    MachinesComponent,
+    MachineTypesComponent,
   ],
   imports: [
     BrowserModule,

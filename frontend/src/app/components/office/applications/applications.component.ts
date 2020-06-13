@@ -1,8 +1,11 @@
-import { ApplicationsService } from './../../../services/applications.service';
 import { Component, OnInit } from '@angular/core';
-import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
+import { Observable } from 'rxjs';
+import { ApplicationsService } from './../../../services/applications.service';
+import { MachineTypesService } from 'src/app/services/machine-types.service';
 import { Application } from 'src/app/models/application';
+import { MachineType } from 'src/app/models/machine-type';
+import { MachineTypePipe } from './../../../pipes/machine-type.pipe';
 
 @Component({
   selector: 'app-applications',
@@ -10,29 +13,36 @@ import { Application } from 'src/app/models/application';
   styleUrls: ['./applications.component.css']
 })
 export class ApplicationsComponent implements OnInit {
-  displayedColumns: string[] = ['select', 'IdWniosek', 'IdRodzajMaszyny', 'Rejestracja', 'Tresc'];
-  dataSource: MatTableDataSource<Application>;
-  selection = new SelectionModel<Application>(false, []);
+  dataSource = new MatTableDataSource<Application>();
+  displayedColumns: string[] = ['IdWniosek', 'RodzajMaszyny', 'Rejestracja', 'Tresc', 'Poprawnosc'];
 
-  applications: Application[];
+  machineTypes: MachineType[];
 
   constructor(
-    private applicationsService: ApplicationsService
-  ) { }
+    private applicationsService: ApplicationsService,
+    private machineTypesService: MachineTypesService
+    ) { }
 
   ngOnInit(): void {
     this.getApplications();
-    this.applications = [{ IdWniosek: 1, IdRodzajMaszyny: 1, Rejestracja: '', Tresc: '', IdZleceniaDefinicji: null }]
-    console.log(this.applications);
-    this.dataSource = new MatTableDataSource<Application>(this.applications);
+    this.getMachineTypes();
   }
 
   getApplications(): void {
     this.applicationsService.getApplications()
-      .subscribe(applications => this.applications = applications);
+      .subscribe(applications => this.dataSource.data = applications);
   }
 
-  checkboxLabel(row?: Application): string {
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.IdWniosek + 1}`;
+  getMachineTypes(): void {
+    this.machineTypesService.getMachineTypes()
+      .subscribe(machineTypes => this.machineTypes = machineTypes);
+  }
+
+  acceptApplication(idWniosek: number) {
+    this.applicationsService.editApplication(idWniosek, true).subscribe();
+  }
+
+  declineApplication(idWniosek: number) {
+    this.applicationsService.editApplication(idWniosek, false).subscribe();
   }
 }

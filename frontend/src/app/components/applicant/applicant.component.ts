@@ -37,7 +37,6 @@ export class ApplicantComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('btn pressed');
     this.applicationSendingFailed = false;
 
     if (this.applicationForm.invalid) {
@@ -49,6 +48,6 @@ export class ApplicantComponent implements OnInit {
       this.applicationForm.get('machineType').value,
       this.applicationForm.get('licenseNumber').value,
       this.applicationForm.get('content').value
-    );
+    ).subscribe();
   }
 }

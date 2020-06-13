@@ -14,34 +14,44 @@ export class MachinesService {
     private http: HttpClient
   ) { }
 
-  getMachines(dueDate: string) : Observable<Machine[]> {
-    return this.http.get<Machine[]>(this.machinesUrl + '/?dueDate=' + dueDate)
+  getMachines(dueDate: string): Observable<Machine[]> {
+    return this.http.get<Machine[]>(this.machinesUrl, { params: { dueDate: dueDate } })
       .pipe(
         catchError(this.handleError<Machine[]>('getMachines', []))
       );
   }
 
   addNewMachine(idRodzajMaszyny: number, rejestracja: string, terminWaznosciPrzegladu: string): Observable<Machine> {
-    let machine = { rejestracja: rejestracja, terminWaznosciPrzegladu: terminWaznosciPrzegladu, idRodzajMaszyny: idRodzajMaszyny };
+    let body = { Rejestracja: rejestracja, TerminWaznosciPrzegladu: terminWaznosciPrzegladu, IdRodzajMaszyny: idRodzajMaszyny };
 
-    return this.http.put<Machine>(this.machinesUrl, machine)
+    return this.http.put<Machine>(this.machinesUrl, body)
       .pipe(
         catchError(this.handleError<Machine>('addNewMachine'))
       );
   }
 
-  editMachine(idMaszyna: number, terminNastepnegoPrzegladu: string): Observable<Machine> {
-    let update = { idMaszyna: idMaszyna, terminNastepnegoPrzegladu: terminNastepnegoPrzegladu };
+  editMachineOperability(idMaszyna: number, czyZdatna: boolean): Observable<Machine> {
+    let body = { IdMaszyna: idMaszyna, CzyZdatna: czyZdatna };
 
-    return this.http.post<Machine>(this.machinesUrl, update)
+    return this.http.patch<Machine>(this.machinesUrl, body)
       .pipe(
-        catchError(this.handleError<Machine>('editMachine'))
+        catchError(this.handleError<Machine>('editMachineOperability'))
+      );
+  }
+
+  editMachineNextInspection(idMaszyna: number, terminNastepnegoPrzegladu: string): Observable<Machine> {
+    let body = { IdMaszyna: idMaszyna, TerminNastepnegoPrzegladu: terminNastepnegoPrzegladu };
+
+    return this.http.post<Machine>(this.machinesUrl, body)
+      .pipe(
+        catchError(this.handleError<Machine>('editMachineNextInspection'))
       );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
+      alert('Error: ' + error.message);
       return of(result as T);
     }
   }
