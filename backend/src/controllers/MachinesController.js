@@ -88,7 +88,7 @@ module.exports.setMachineApproval = function(req, res, next) {
   }
 
   const service = new MachinesService();
-  const result = service.setNextOverviewDate(req.body.IdMaszyna, req.body.CzyZdatna);
+  const result = service.setMachineApproval(req.body.IdMaszyna, req.body.CzyZdatna);
 
   if( result === null) {
     res.send(406);
