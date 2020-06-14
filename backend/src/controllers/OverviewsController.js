@@ -30,7 +30,7 @@ module.exports.addOverview = function(req, res, next) {
     IdWniosek: req.body.IdWniosek === undefined ? null : req.body.IdWniosek
   };
 
-  const service = new OverwievsService();
+  const service = new OverviewsService();
   const result = service.addOverview(overview);
   
   res.send(200, result);
