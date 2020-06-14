@@ -33,7 +33,7 @@ export class DefinitionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.definitionForm = this.formBuilder.group({
-      machine: ['', Validators.required],
+      machineType: ['', Validators.required],
       definitionDocument: ['', Validators.required]
     });
 
@@ -78,7 +78,7 @@ export class DefinitionsComponent implements OnInit {
     }
 
     this.definitionTasksService.addNewDefinitionTask(
-      this.definitionForm.get('machineType').value
+      this.definitionTaskForm.get('machineType').value
       ).subscribe();
   }
 }

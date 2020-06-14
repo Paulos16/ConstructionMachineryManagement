@@ -21,8 +21,8 @@ export class InspectionsService {
       );
   }
 
-  addNewInspection(idMaszyna: number, idWniosek: number, dokument: string): Observable<Inspection> {
-    let body = { IdMaszyna: idMaszyna, IdWniosek: idWniosek, Dokument: dokument };
+  addNewInspection(idMaszyna: number, dokument: string, idWniosek: number): Observable<Inspection> {
+    let body = { IdMaszyna: idMaszyna, Dokument: dokument, CzyZrobiony: false, IdWniosek: idWniosek };
 
     return this.http.put<Inspection>(this.inspectionsUrl, body)
       .pipe(

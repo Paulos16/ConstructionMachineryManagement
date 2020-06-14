@@ -23,7 +23,7 @@ export class InspectorComponent implements OnInit {
   definitionTasksDisplayedColumns: string[] = ['IdZlecenieDefinicji', 'RodzajMaszyny', 'Data'];
 
   inspectionTasksDataSource = new MatTableDataSource<InspectionTask>();
-  inspectionTasksDisplayedColumns: string[] = ['IdZleceniePrzegladu', 'Rejestracja', 'Data', 'Dokument'];
+  inspectionTasksDisplayedColumns: string[] = ['IdZleceniaPrzegladu', 'Rejestracja', 'Data', 'Dokument'];
 
   machineTypes: MachineType[];
   machines: Machine[];
@@ -39,7 +39,7 @@ export class InspectorComponent implements OnInit {
     this.selectedTab = this.selections[0];
 
     this.getDefinitionTasks();
-    //this.getInspectionTasks();
+    this.getInspectionTasks();
     this.getMachineTypes();
     this.getMachines();
   }

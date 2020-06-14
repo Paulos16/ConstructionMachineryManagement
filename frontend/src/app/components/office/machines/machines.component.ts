@@ -38,7 +38,7 @@ export class MachinesComponent implements OnInit {
     this.machinesService.editMachineOperability(idMaszyna, false)
       .subscribe();
 
-    if (idWniosek !== null)
+    if (idWniosek)
       this.applicationsService.editApplicationStatus(idWniosek, 'Maszyna niezdatna do dalszej eksploatacji')
         .subscribe();
   }

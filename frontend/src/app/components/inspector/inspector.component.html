@@ -34,9 +34,9 @@
     <div *ngIf="selectedTab === 'inspection-tasks'">
         <table mat-table [dataSource]="inspectionTasksDataSource" class="mat-elevation-z8">
 
-            <ng-container matColumnDef="IdZleceniePrzegladu">
+            <ng-container matColumnDef="IdZleceniaPrzegladu">
                 <th mat-header-cell *matHeaderCellDef>Numer zlecenia</th>
-                <td mat-cell *matCellDef="let element">{{element.IdZleceniePrzegladu}}</td>
+                <td mat-cell *matCellDef="let element">{{element.IdZleceniaPrzegladu}}</td>
             </ng-container>
         
             <ng-container matColumnDef="Rejestracja">

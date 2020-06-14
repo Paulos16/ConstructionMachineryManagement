@@ -47,6 +47,7 @@ export class ApplicationsService {
 
     return this.http.post<Application>(this.applicationsUrl, body)
       .pipe(
+        tap(() => alert('Zmieniono status wniosku na ' + status + '.')),
         catchError(this.handleError<Application>('editApplicationStatus'))
       );
   }

@@ -31,6 +31,7 @@ import { InspectionsComponent } from './components/office/inspections/inspection
 import { MachinePipe } from './pipes/machine.pipe';
 import { MachinesComponent } from './components/office/machines/machines.component';
 import { MachineTypesComponent } from './components/office/machine-types/machine-types.component';
+import { TakNiePipe } from './pipes/tak-nie.pipe';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { MachineTypesComponent } from './components/office/machine-types/machine
     MachinePipe,
     MachinesComponent,
     MachineTypesComponent,
+    TakNiePipe,
   ],
   imports: [
     BrowserModule,

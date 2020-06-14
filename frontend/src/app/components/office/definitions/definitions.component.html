@@ -46,7 +46,7 @@
     <mat-grid-tile>
         <mat-card>
             <mat-card-title>Zlecenie utworzenia dokumentu definicji zadań przeglądowych</mat-card-title>
-            <mat-error *ngIf="definitionSendingFailed">Przesłanie zlecenia nie powiodło się!</mat-error>
+            <mat-error *ngIf="definitionTaskSendingFailed">Przesłanie zlecenia nie powiodło się!</mat-error>
             <mat-card-content>
                 <form [formGroup]="definitionTaskForm" (ngSubmit)="onSubmitDefinitionTask()">
                     <mat-form-field class="full-width-input">

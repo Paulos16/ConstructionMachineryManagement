@@ -22,17 +22,18 @@
 
     <ng-container matColumnDef="CzyZdatna">
         <th mat-header-cell *matHeaderCellDef>Zdatność do eksploatacji</th>
-        <td mat-cell *matCellDef="let element">{{element.CzyZdatna}}</td>
+        <td mat-cell *matCellDef="let element">{{element.CzyZdatna | takNie}}</td>
     </ng-container>
 
     <ng-container matColumnDef="Zdatnosc">
         <th mat-header-cell *matHeaderCellDef>Weryfikacja zdatności</th>
         <td mat-cell *matCellDef="let element">
-            <div *ngIf="!element.CzyZdatny">
+            <div *ngIf="element.CzyZdatna === true || element.CzyZdatna === null || element.CzyZdatna === undefined; else invalid">
                 <button mat-icon-button color="primary" aria-label="Oznacz jako niezdatny do eksploatacji" (click)="setAsUnoperable(element.IdMaszyna, element.IdWniosek)">
                     <mat-icon>highlight_off</mat-icon>
                 </button>
             </div>
+            <ng-template #invalid>Niezdatna do eksploatacji</ng-template>
         </td>
     </ng-container>
   

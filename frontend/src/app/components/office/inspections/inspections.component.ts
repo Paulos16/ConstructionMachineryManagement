@@ -35,12 +35,12 @@ export class InspectionsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.newInspectionForm = this.formBuilder.group({
-      machine: ['', Validators.required],
+    this.inspectionCorrectForm = this.formBuilder.group({
+      inspection: ['', Validators.required],
       inspectionDocument: ['', Validators.required]
     });
 
-    this.inspectionCorrectForm = this.formBuilder.group({
+    this.newInspectionForm = this.formBuilder.group({
       machine: ['', Validators.required],
       inspectionDocument: ['', Validators.required]
     });
@@ -62,31 +62,6 @@ export class InspectionsComponent implements OnInit {
       .subscribe(machines => this.machines = machines);
   }
 
-  onSubmitNew() {
-    this.newInspectionSendingFailed = false;
-
-    if (this.newInspectionForm.invalid) {
-      this.newInspectionSendingFailed = true;
-      return;
-    }
-
-    this.inspectionsService.addNewInspection(
-        this.newInspectionForm.get('machine').value.IdMaszyna,
-        this.newInspectionForm.get('machine').value.IdWniosek,
-        this.newInspectionForm.get('inspectionDocument').value
-      ).subscribe();
-
-    this.inspectionTasksService.addNewInspectionTask(
-        this.newInspectionForm.get('machine').value.IdMaszyna,
-        this.newInspectionForm.get('inspectionDocument').value
-      ).subscribe();
-
-    this.applicationsService.editApplicationStatus(
-        this.newInspectionForm.get('machine').value.IdWniosek,
-        'Przegląd w trakcie'
-      ).subscribe();
-  }
-
   onSubmitCorrect() {
     this.inspectionCorrectSendingFailed = false;
 
@@ -96,21 +71,47 @@ export class InspectionsComponent implements OnInit {
     }
 
     this.inspectionsService.editCorrectInspection(
-      this.inspectionCorrectForm.get('inspection').value.IdPrzeglad,
+      this.inspectionCorrectForm.get('inspection').value[0],
       this.inspectionCorrectForm.get('inspectionDocument').value
     ).subscribe();
 
     let ymd = formatDate(new Date(), 'yyyy-MM-dd', 'en').split('-');
     let yearAfter = String(parseInt(ymd[0]) + 1) + '-' + ymd[1] + '-' + ymd[2];
     this.machinesService.editMachineNextInspection(
-        this.inspectionCorrectForm.get('inspection').value.IdMaszyna,
+        this.inspectionCorrectForm.get('inspection').value[2],
         yearAfter
       ).subscribe();
     
-    if (this.inspectionCorrectForm.get('inspection').value.IdWniosek !== null)
+    if (this.inspectionCorrectForm.get('inspection').value[4])
       this.applicationsService.editApplicationStatus(
-          this.inspectionCorrectForm.get('inspection').value.IdWniosek,
+          this.inspectionCorrectForm.get('inspection').value[4],
           'Przegląd zakończony pomyślnie'
+        ).subscribe();
+  }
+
+  onSubmitNew() {
+    this.newInspectionSendingFailed = false;
+
+    if (this.newInspectionForm.invalid) {
+      this.newInspectionSendingFailed = true;
+      return;
+    }
+
+    this.inspectionsService.addNewInspection(
+        this.newInspectionForm.get('machine').value[0],
+        this.newInspectionForm.get('inspectionDocument').value,
+        this.newInspectionForm.get('machine').value[2]
+      ).subscribe();
+
+    this.inspectionTasksService.addNewInspectionTask(
+        this.newInspectionForm.get('machine').value[0],
+        this.newInspectionForm.get('inspectionDocument').value
+      ).subscribe();
+
+    if (this.newInspectionForm.get('machine').value[2])
+      this.applicationsService.editApplicationStatus(
+          this.newInspectionForm.get('machine').value[2],
+          'Przegląd w trakcie'
         ).subscribe();
   }
 }
