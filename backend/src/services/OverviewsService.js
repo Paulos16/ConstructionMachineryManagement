@@ -55,8 +55,8 @@ module.exports = function() {
       .find((o) => o.IdPrzeglad === overviewId)
       .value();
     
-    overwiev.DokumentPrzegladu = document;
-    overwiev.CzyZrobiony = true;
+    overview.DokumentPrzegladu = document;
+    overview.CzyZrobiony = true;
     
     db.write();
 
