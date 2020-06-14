@@ -56,8 +56,8 @@ module.exports = function() {
       .first()
       .value();
     
-    overwiev.DokumentPrzegladu = document;
-    overwiev.CzyZrobiony = true;
+    overview.DokumentPrzegladu = document;
+    overview.CzyZrobiony = true;
     
     db.write();
 
