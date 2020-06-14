@@ -85,7 +85,7 @@ server.put('/api/definicje', DefinitionsController.addDefinition);
 server.patch('/api/definicje', DefinitionsController.addDefinitionDocument);
 server.put('/api/przeglady', OverviewsController.addOverview);
 server.put('/api/zleceniaPrzegladow', OverviewsController.addOverviewTask);
-server.post('/api/przeglady', OverviewsController.addOverviewToCorrect);
+server.get('/api/zleceniaPrzegladow', OverviewsController.getOverviewTasks);
 server.get('/api/przeglady', OverviewsController.getOverviews);
 server.patch('/api/przeglady', OverviewsController.addCorrectOverview);
 server.post('/api/maszyny', MachinesController.setNextOverviewDate);

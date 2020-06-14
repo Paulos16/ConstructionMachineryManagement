@@ -37,6 +37,14 @@ module.exports = function() {
     return machines;
   }
 
+  this.getAllMachines = function(date) {
+
+    const machines = db.get('machines')
+      .value();
+
+    return machines;
+  }
+
   this.setNextOverviewDate = function(machineId, nextDate) {
 
     const machine = db.get('machines')

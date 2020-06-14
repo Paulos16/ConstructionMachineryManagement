@@ -41,17 +41,12 @@ module.exports = function() {
     return overviewTask;
   }
 
-  this.addOverviewToCorrect = function(overviewId, document) {
+  this.getOverviewTasks = function() {
 
-    const overview = db.get('overviews')
-      .find((o) => o.IdPrzeglad === overviewId)
-      .value();
-    
-    overwiev.DokumentPrzegladu = document;
-    
-    db.write();
+    const overviewTasks = db.get('overviewTasks')
+      .value()
 
-    return overwiev;
+    return overviewTasks;
   }
 
   this.addCorrectOverview = function(overviewId, document) {

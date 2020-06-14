@@ -12,7 +12,8 @@ module.exports.addMachine = function(req, res, next) {
   if(!(req.body !== undefined &&
     req.body.IdRodzajMaszyny !== undefined &&
     req.body.Rejestracja !== undefined &&
-    req.body.TerminWaznosciPrzegladu !== undefined)) {
+    req.body.TerminWaznosciPrzegladu !== undefined && 
+    req.body.IdWniosek !== undefined)) {
     
     res.send(400);
     next();
@@ -24,7 +25,8 @@ module.exports.addMachine = function(req, res, next) {
     Rejestracja: req.body.Rejestracja,
     CzyZdatna: null,
     TerminWaznosciPrzegladu: req.body.TerminWaznosciPrzegladu,
-    IdRodzajMaszyny: req.body.IdRodzajMaszyny
+    IdRodzajMaszyny: req.body.IdRodzajMaszyny,
+    IdWniosek: req.body.IdWniosek
   }
 
   const service = new MachinesService();
@@ -36,8 +38,7 @@ module.exports.addMachine = function(req, res, next) {
 
 module.exports.getMachines = function(req, res, next) {
 
-  if(!(req.query !== undefined &&
-    req.query.dueDate !== undefined)) {
+  if(!(req.query !== undefined)) {
     
     res.send(400);
     next();
@@ -45,7 +46,13 @@ module.exports.getMachines = function(req, res, next) {
   }
 
   const service = new MachinesService();
-  const result = service.getMachines(req.query.dueDate);
+  let result;
+
+  if(req.query.dueDate === 'null') {
+    result = service.getAllMachines();
+  } else {
+    result = service.getMachines(req.query.dueDate);
+  }
   
   res.send(200, result);
   next();
