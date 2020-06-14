@@ -71,6 +71,8 @@ module.exports = function() {
     
     machine.CzyZdatna = approval;
 
+    db.write()
+
     return machine;
   }
   
