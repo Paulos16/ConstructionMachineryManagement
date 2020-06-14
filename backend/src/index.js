@@ -44,7 +44,8 @@ server.use(restify.plugins.bodyParser({
 server.use(restify.plugins.queryParser());
 
 server.pre(function(req, res, next) {
-  if(req.path() != '/api/auth/login') {
+  if(req.path() != '/api/auth/login' &&
+     req.path() != '/api/teapot') {
     if(req.header('Authorization') === undefined || !req.header('Authorization').startsWith('Bearer ') || req.header('Authorization') <= 7) {
       res.send(401);
       return next(new Error('Unauthorized'));
@@ -90,5 +91,9 @@ server.get('/api/przeglady', OverviewsController.getOverviews);
 server.patch('/api/przeglady', OverviewsController.addCorrectOverview);
 server.post('/api/maszyny', MachinesController.setNextOverviewDate);
 server.patch('/api/maszyny', MachinesController.setMachineApproval);
+server.get('/api/teapot', (req, res, next) => {
+  res.send(418, "Request can't be processed, because the server is a teapot! Please see https://http.cat/418 to get visualization")
+  next();
+});
 
 server.listen(5000, () =>  console.log('%s listening at %s\n', server.name, server.url));
