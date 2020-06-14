@@ -107,9 +107,10 @@ export class InspectionsComponent implements OnInit {
         yearAfter
       ).subscribe();
     
-    this.applicationsService.editApplicationStatus(
-        this.inspectionCorrectForm.get('inspection').value.IdWniosek,
-        'Przegląd zakończony pomyślnie'
-      ).subscribe();
+    if (this.inspectionCorrectForm.get('inspection').value.IdWniosek !== null)
+      this.applicationsService.editApplicationStatus(
+          this.inspectionCorrectForm.get('inspection').value.IdWniosek,
+          'Przegląd zakończony pomyślnie'
+        ).subscribe();
   }
 }
