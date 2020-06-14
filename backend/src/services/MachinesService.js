@@ -49,6 +49,7 @@ module.exports = function() {
 
     const machine = db.get('machines')
       .filter((m) => m.IdMaszyna === machineId)
+      .first()
       .value();
     
     machine.TerminWaznosciPrzegladu = nextDate;
@@ -62,6 +63,7 @@ module.exports = function() {
 
     const machine = db.get('machines')
       .filter((m) => m.IdMaszyna === machineId)
+      .first()
       .value();
     
     if(machine === undefined) {
@@ -69,8 +71,6 @@ module.exports = function() {
     }
     
     machine.CzyZdatna = approval;
-
-    db.write();
 
     return machine;
   }

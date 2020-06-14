@@ -29,6 +29,7 @@ module.exports = function() {
 
     const application = db.get('applications')
       .find((a) => a.IdWniosek === applicationId)
+      .first()
       .value();
     
     if(application === undefined) {
@@ -45,6 +46,7 @@ module.exports = function() {
 
     const application = db.get('applications')
       .find((a) => a.IdWniosek === applicationId)
+      .first()
       .value();
     
     if(application === undefined) {
