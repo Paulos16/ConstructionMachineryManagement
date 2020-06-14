@@ -60,7 +60,7 @@ module.exports = function() {
     
     db.write();
 
-    return overwiev;
+    return overview;
   }
   
 }
