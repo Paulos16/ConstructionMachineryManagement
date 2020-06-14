@@ -15,8 +15,7 @@ module.exports.addOverview = function(req, res, next) {
   if(!(req.body !== undefined &&
     req.body.IdMaszyna !== undefined &&
     req.body.Dokument !== undefined &&
-    req.body.CzyZrobiony !== undefined &&
-    req.body.IdWniosek !== undefined)) {
+    req.body.CzyZrobiony !== undefined)) {
     
     res.send(400);
     next();
@@ -28,7 +27,7 @@ module.exports.addOverview = function(req, res, next) {
     DokumentPrzegladu: req.body.Dokument,
     CzyZrobiony: req.body.CzyZrobiony,
     IdMaszyna: req.body.IdMaszyna,
-    IdWniosek: req.body.IdWniosek
+    IdWniosek: req.body.IdWniosek === undefined ? null : req.body.IdWniosek
   };
 
   const service = new OverwievsService();
