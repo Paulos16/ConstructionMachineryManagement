@@ -70,9 +70,9 @@ module.exports.setApplicationStatus = function(req, res, next) {
     next();
     return;
   }
-
+  
   const service = new ApplicationsService();
-  const result = service.setApplicationStatus(req.body.IdWniosek, req.body.Status);
+  const result = service.setApplicationStatus(Number(req.body.IdWniosek), req.body.Status);
 
   if( result === null) {
     res.send(406);

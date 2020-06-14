@@ -44,14 +44,8 @@ module.exports = function() {
   this.setApplicationStatus = function(applicationId, status) {
 
     const application = db.get('applications')
-      .find((a) => a.IdWniosek == applicationId)
+      .find((a) => a.IdWniosek === applicationId)
       .value();
-    
-    console.log('WNIOSKI:');
-    console.log(db.get('applications').value());
-    console.log('SZUKANY WNIOSEK (id): ' + applicationId);
-    console.log('ZNALEZIONY WNIOSEK:');
-    console.log(application);
     
     if(application === undefined) {
       return null;
