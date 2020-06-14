@@ -32,14 +32,29 @@ module.exports.getMockedDatabaseData = function() {
       },
       {
         IdRodzajMaszyny: 2,
-        Nazwa: 'Betoniara'
+        Nazwa: 'Betoniarka BET'
       }
     ],
     machineTypesCount: 2,
-    machines: [],
-    machinesCount: 0,
-    definitions: [],
-    definitionsCount: 0,
+    machines: [
+      {
+        IdMaszyna: 1,
+        Rejestracja: 'Betty1',
+        CzyZdatna: null,
+        TerminWaznosciPrzegladu: '2020-01-01',
+        IdRodzajMaszyny: 2,
+        IdWniosek: null
+      }
+    ],
+    machinesCount: 1,
+    definitions: [
+      {
+        IdDefinicja: 1,
+        DokumentDefinicji: 'Badanie komory obrotowej; pomiar napięcia akumulatora.',
+        IdRodzajMaszyny: 2
+      }
+    ],
+    definitionsCount: 1,
     definitionTask: [],
     definitionTaskCount: 0,
     overviews: [],
