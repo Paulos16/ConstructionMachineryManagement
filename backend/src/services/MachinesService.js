@@ -55,7 +55,7 @@ module.exports = function() {
 
     db.write();
 
-    return machines;
+    return machine;
   }
 
   this.setMachineApproval = function(machineId, approval) {
@@ -72,7 +72,7 @@ module.exports = function() {
 
     db.write();
 
-    return machines;
+    return machine;
   }
   
 }
