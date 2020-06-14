@@ -53,7 +53,6 @@ module.exports = function() {
 
     const overview = db.get('overviews')
       .find((o) => o.IdPrzeglad === overviewId)
-      .first()
       .value();
     
     overview.DokumentPrzegladu = document;

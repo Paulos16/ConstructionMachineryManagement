@@ -53,7 +53,6 @@ module.exports = function() {
 
     const definition = db.get('definitions')
       .filter((def) => def.IdRodzajMaszyny === machineType)
-      .first()
       .value()
     
     if(definition === undefined) {
