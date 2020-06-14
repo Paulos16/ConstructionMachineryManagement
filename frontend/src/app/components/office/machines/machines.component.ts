@@ -3,9 +3,9 @@ import { formatDate } from '@angular/common';
 import { MatTableDataSource } from '@angular/material/table';
 import { MachinesService } from 'src/app/services/machines.service';
 import { MachineTypesService } from 'src/app/services/machine-types.service';
+import { ApplicationsService } from 'src/app/services/applications.service';
 import { Machine } from 'src/app/models/machine';
 import { MachineType } from 'src/app/models/machine-type';
-import { MachineTypePipe } from 'src/app/pipes/machine-type.pipe'
 
 @Component({
   selector: 'app-machines',
@@ -20,21 +20,27 @@ export class MachinesComponent implements OnInit {
 
   constructor(
     private machinesService: MachinesService,
-    private machineTypesService: MachineTypesService
+    private machineTypesService: MachineTypesService,
+    private applicationsService: ApplicationsService
   ) { }
 
   ngOnInit(): void {
     this.getMachines();
+    this.getMachineTypes();
   }
 
   getMachines(): void {
-    this.machinesService.getMachines(formatDate(new Date(), 'yyyy-MM-dd', 'pl'))
+    this.machinesService.getMachines(formatDate(new Date(), 'yyyy-MM-dd', 'en'))
       .subscribe(machines => this.dataSource.data = machines);
   }
 
-  setAsUnoperable(idMaszyna: number): void {
+  setAsUnoperable(idMaszyna: number, idWniosek: number): void {
     this.machinesService.editMachineOperability(idMaszyna, false)
       .subscribe();
+
+    if (idWniosek !== null)
+      this.applicationsService.editApplicationStatus(idWniosek, 'Maszyna niezdatna do dalszej eksploatacji')
+        .subscribe();
   }
 
   getMachineTypes(): void {

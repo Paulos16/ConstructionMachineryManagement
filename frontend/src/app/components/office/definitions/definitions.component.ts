@@ -3,9 +3,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DefinitionsService } from 'src/app/services/definitions.service';
 import { MachineTypesService } from 'src/app/services/machine-types.service';
+import { DefinitionTasksService } from 'src/app/services/definition-tasks.service'
 import { Definition } from 'src/app/models/definition';
 import { MachineType } from 'src/app/models/machine-type';
-import { MachineTypePipe } from './../../../pipes/machine-type.pipe';
 
 @Component({
   selector: 'app-definitions',
@@ -19,18 +19,26 @@ export class DefinitionsComponent implements OnInit {
   definitionForm: FormGroup;
   definitionSendingFailed: boolean;
 
+  definitionTaskForm: FormGroup;
+  definitionTaskSendingFailed: boolean;
+
   machineTypes: MachineType[];
 
   constructor(
     private formBuilder: FormBuilder,
     private definitionsService: DefinitionsService,
-    private machineTypesService: MachineTypesService
+    private machineTypesService: MachineTypesService,
+    private definitionTasksService: DefinitionTasksService
   ) { }
 
   ngOnInit(): void {
     this.definitionForm = this.formBuilder.group({
-      machineType: ['', Validators.required],
+      machine: ['', Validators.required],
       definitionDocument: ['', Validators.required]
+    });
+
+    this.definitionTaskForm = this.formBuilder.group({
+      machineType: ['', Validators.required]
     });
 
     this.getDefinitions();
@@ -47,7 +55,7 @@ export class DefinitionsComponent implements OnInit {
       .subscribe(machineTypes => this.machineTypes = machineTypes);
   }
 
-  onSubmit() {
+  onSubmitDefinition() {
     this.definitionSendingFailed = false;
 
     if (this.definitionForm.invalid) {
@@ -59,5 +67,18 @@ export class DefinitionsComponent implements OnInit {
       this.definitionForm.get('machineType').value,
       this.definitionForm.get('definitionDocument').value
     ).subscribe();
+  }
+
+  onSubmitDefinitionTask() {
+    this.definitionTaskSendingFailed = false;
+
+    if (this.definitionTaskForm.invalid) {
+      this.definitionTaskSendingFailed = true;
+      return;
+    }
+
+    this.definitionTasksService.addNewDefinitionTask(
+      this.definitionForm.get('machineType').value
+      ).subscribe();
   }
 }

@@ -1,0 +1,13 @@
+.role-content {
+    max-width: 95%;
+    margin: auto;
+    margin-top: 30px;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-column-select {
+    overflow: initial;
+}

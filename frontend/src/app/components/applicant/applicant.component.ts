@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
+import { ApplicationsService } from 'src/app/services/applications.service';
 import { MachineTypesService } from 'src/app/services/machine-types.service';
-import { ApplicationsService } from '../../services/applications.service';
-import { MachineType } from './../../models/machine-type';
+import { Application } from 'src/app/models/application';
+import { MachineType } from 'src/app/models/machine-type';
 
 @Component({
   selector: 'app-applicant',
@@ -10,6 +12,12 @@ import { MachineType } from './../../models/machine-type';
   styleUrls: ['./applicant.component.css']
 })
 export class ApplicantComponent implements OnInit {
+  selections = ['applications', 'new-application'];
+  selectedTab: string;
+
+  dataSource = new MatTableDataSource<Application>();
+  displayedColumns: string[] = ['IdWniosek', 'RodzajMaszyny', 'Rejestracja', 'Tresc', 'Status'];
+
   applicationForm: FormGroup;
   applicationSendingFailed: boolean;
   
@@ -22,13 +30,28 @@ export class ApplicantComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.selectedTab = this.selections[0];
+
     this.applicationForm = this.formBuilder.group({
       machineType: ['', Validators.required],
       licenseNumber: ['', Validators.required],
       content: ['', Validators.required]
     });
 
+    this.getApplications();
     this.getMachineTypes();
+  }
+
+  selectTab(selection: number) {
+    if (selection >= this.selections.length)
+      selection = 0;
+
+    this.selectedTab = this.selections[selection];
+  }
+
+  getApplications(): void {
+    this.applicationsService.getApplications()
+      .subscribe(applications => this.dataSource.data = applications);
   }
 
   getMachineTypes(): void {
@@ -45,9 +68,9 @@ export class ApplicantComponent implements OnInit {
     }
 
     this.applicationsService.addNewApplication(
-      this.applicationForm.get('machineType').value,
-      this.applicationForm.get('licenseNumber').value,
-      this.applicationForm.get('content').value
-    ).subscribe();
-  }
+        this.applicationForm.get('machineType').value,
+        this.applicationForm.get('licenseNumber').value,
+        this.applicationForm.get('content').value
+      ).subscribe();
+    }
 }

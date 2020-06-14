@@ -6,13 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./office.component.css']
 })
 export class OfficeComponent implements OnInit {
-  selections = ['machines', 'machine-types', 'applications', 'definitions', 'inspections'];
+  selections = ['applications', 'definitions', 'inspections', 'machines', 'machine-types'];
   selectedTab: string;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.selectedTab = this.selections[2];
+    this.selectedTab = this.selections[0];
   }
 
   selectTab(selection: number) {

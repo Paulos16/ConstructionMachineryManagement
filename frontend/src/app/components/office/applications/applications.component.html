@@ -7,7 +7,7 @@
   
     <ng-container matColumnDef="RodzajMaszyny">
         <th mat-header-cell *matHeaderCellDef>Rodzaj maszyny</th>
-        <td mat-cell *matCellDef="let element">{{element.IdRodzajMaszyny}}</td>
+        <td mat-cell *matCellDef="let element">{{element.IdRodzajMaszyny | machineTypeName:machineTypes}}</td>
     </ng-container>
   
     <ng-container matColumnDef="Rejestracja">
@@ -20,11 +20,16 @@
         <td mat-cell *matCellDef="let element">{{element.Tresc}}</td>
     </ng-container>
 
+    <ng-container matColumnDef="Status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let element">{{element.Status}}</td>
+    </ng-container>
+
     <ng-container matColumnDef="Poprawnosc">
         <th mat-header-cell *matHeaderCellDef>Weryfikacja poprawności</th>
         <td mat-cell *matCellDef="let element">
             <div *ngIf="element.CzyPoprawny === null; else revised">
-                <button mat-icon-button color="primary" aria-label="Zaakceptuj wniosek" (click)="acceptApplication(element.IdWniosek)">
+                <button mat-icon-button color="primary" aria-label="Zaakceptuj wniosek" (click)="acceptApplication(element)">
                     <mat-icon>check_circle_outline</mat-icon>
                 </button>
                 <button mat-icon-button color="warn" aria-label="Odrzuć wniosek" (click)="declineApplication(element.IdWniosek)">
@@ -33,7 +38,7 @@
             </div>
             <ng-template #revised>
                 <div *ngIf="element.CzyPoprawny; then valid else invalid"></div>
-                <ng-template #valid>Zaakceptowany</ng-template>
+                <ng-template #valid>Zatwierdzony</ng-template>
                 <ng-template #invalid>Odrzucony</ng-template>
             </ng-template>
         </td>

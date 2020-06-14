@@ -3,4 +3,5 @@ export interface Inspection {
     DokumentPrzegladu: string;
     CzyZrobiony: boolean;
     IdMaszyna: number;
+    IdWniosek: number;
 }

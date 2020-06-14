@@ -21,11 +21,12 @@ export class MachinesService {
       );
   }
 
-  addNewMachine(idRodzajMaszyny: number, rejestracja: string, terminWaznosciPrzegladu: string): Observable<Machine> {
-    let body = { Rejestracja: rejestracja, TerminWaznosciPrzegladu: terminWaznosciPrzegladu, IdRodzajMaszyny: idRodzajMaszyny };
+  addNewMachine(idRodzajMaszyny: number, rejestracja: string, terminWaznosciPrzegladu: string, idWniosek: number): Observable<Machine> {
+    let body = { Rejestracja: rejestracja, TerminWaznosciPrzegladu: terminWaznosciPrzegladu, IdRodzajMaszyny: idRodzajMaszyny, IdWniosek: idWniosek };
 
     return this.http.put<Machine>(this.machinesUrl, body)
       .pipe(
+        tap(() => alert('Nowa maszyna została zapisana pomyślnie.')),
         catchError(this.handleError<Machine>('addNewMachine'))
       );
   }
@@ -35,6 +36,7 @@ export class MachinesService {
 
     return this.http.patch<Machine>(this.machinesUrl, body)
       .pipe(
+        tap(() => alert('Zdatność maszyny do eksploatacji ustalona pomyślnie.')),
         catchError(this.handleError<Machine>('editMachineOperability'))
       );
   }
@@ -44,6 +46,7 @@ export class MachinesService {
 
     return this.http.post<Machine>(this.machinesUrl, body)
       .pipe(
+        tap(() => alert('Termin następnego przeglądu maszyny zaplanowany pomyślnie.')),
         catchError(this.handleError<Machine>('editMachineNextInspection'))
       );
   }

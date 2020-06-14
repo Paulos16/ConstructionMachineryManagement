@@ -7,7 +7,7 @@
   
     <ng-container matColumnDef="RodzajMaszyny">
         <th mat-header-cell *matHeaderCellDef>Rodzaj maszyny</th>
-        <td mat-cell *matCellDef="let element">{{element.IdRodzajMaszyny}}</td>
+        <td mat-cell *matCellDef="let element">{{element.IdRodzajMaszyny | machineTypeName:machineTypes}}</td>
     </ng-container>
   
     <ng-container matColumnDef="DokumentDefinicji">
@@ -19,24 +19,47 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
-<mat-card>
-    <mat-card-title>Dokument definicji zadań przeglądowych</mat-card-title>
-    <mat-error *ngIf="definitionSendingFailed">Przesłanie dokumentu nie powiodło się!</mat-error>
-    <mat-card-content>
-        <form [formGroup]="definitionForm" (ngSubmit)="onSubmit()">
-            <mat-form-field class="full-width-input">
-                <mat-select placeholder="Rodzaj maszyny" formControlName="machineType" required>
-                    <mat-option *ngFor="let type of machineTypes" value="{{ type.IdRodzajMaszyny }}">{{ type.Nazwa }}</mat-option>
-                </mat-select>
-                <mat-error>Wybierz rodzaj maszyny</mat-error>
-            </mat-form-field>
-            <mat-form-field class="full-width-input">
-                <textarea matInput placeholder="Treść dokumentu..." formControlName="definitionDocument" required></textarea>
-                <mat-error>Napisz treść dokumentu</mat-error>
-            </mat-form-field>
-            <button mat-raised-button color="primary">
-                Prześlij dokument
-            </button>
-        </form>
-    </mat-card-content>
-</mat-card>
+<mat-grid-list cols="2">
+    <mat-grid-tile>
+        <mat-card>
+            <mat-card-title>Dokument definicji zadań przeglądowych</mat-card-title>
+            <mat-error *ngIf="definitionSendingFailed">Przesłanie dokumentu nie powiodło się!</mat-error>
+            <mat-card-content>
+                <form [formGroup]="definitionForm" (ngSubmit)="onSubmitDefinition()">
+                    <mat-form-field class="full-width-input">
+                        <mat-select placeholder="Rodzaj maszyny" formControlName="machineType" required>
+                            <mat-option *ngFor="let type of machineTypes" value="{{ type.IdRodzajMaszyny }}">{{ type.Nazwa }}</mat-option>
+                        </mat-select>
+                        <mat-error>Wybierz rodzaj maszyny</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="full-width-input">
+                        <textarea matInput placeholder="Treść dokumentu..." formControlName="definitionDocument" required></textarea>
+                        <mat-error>Napisz treść dokumentu</mat-error>
+                    </mat-form-field>
+                    <button mat-raised-button color="primary">
+                        Prześlij dokument
+                    </button>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+        <mat-card>
+            <mat-card-title>Zlecenie utworzenia dokumentu definicji zadań przeglądowych</mat-card-title>
+            <mat-error *ngIf="definitionSendingFailed">Przesłanie zlecenia nie powiodło się!</mat-error>
+            <mat-card-content>
+                <form [formGroup]="definitionTaskForm" (ngSubmit)="onSubmitDefinitionTask()">
+                    <mat-form-field class="full-width-input">
+                        <mat-select placeholder="Rodzaj maszyny" formControlName="machineType" required>
+                            <mat-option *ngFor="let type of machineTypes" value="{{ type.IdRodzajMaszyny }}">{{ type.Nazwa }}</mat-option>
+                        </mat-select>
+                        <mat-error>Wybierz rodzaj maszyny</mat-error>
+                    </mat-form-field>
+                    <button mat-raised-button color="primary">
+                        Prześlij Zlecenie
+                    </button>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>

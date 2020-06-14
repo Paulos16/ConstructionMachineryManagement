@@ -3,5 +3,6 @@ export interface Machine {
     Rejestracja: string;
     CzyZdatna: boolean;
     TerminWaznosciPrzegladu: string;
-    IdRodzajMaszyny: number
+    IdRodzajMaszyny: number;
+    IdWniosek: number;
 }

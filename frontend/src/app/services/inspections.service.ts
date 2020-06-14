@@ -21,33 +21,23 @@ export class InspectionsService {
       );
   }
 
-  addNewInspectionToCorrect(idMaszyna: number, dokument: string): Observable<Inspection> {
-    let body = { IdMaszyna: idMaszyna, Dokument: dokument };
+  addNewInspection(idMaszyna: number, idWniosek: number, dokument: string): Observable<Inspection> {
+    let body = { IdMaszyna: idMaszyna, IdWniosek: idWniosek, Dokument: dokument };
 
     return this.http.put<Inspection>(this.inspectionsUrl, body)
       .pipe(
-        tap(() => alert('Dokument przeglądu do poprawy przesłany pomyślnie.')),
-        catchError(this.handleError<Inspection>('addNewInspectionToCorrect'))
+        tap(() => alert('Nowy dokument przeglądu przesłany pomyślnie.')),
+        catchError(this.handleError<Inspection>('addNewInspection'))
       );
   }
 
-  addNewCorrectInspection(idMaszyna: number, dokument: string): Observable<Inspection> {
-    let body = { IdMaszyna: idMaszyna, Dokument: dokument };
-
-    return this.http.put<Inspection>(this.inspectionsUrl, body)
-      .pipe(
-        tap(() => alert('Poprawny dokument przeglądu przesłany pomyślnie.')),
-        catchError(this.handleError<Inspection>('addNewCorrectInspection'))
-      );
-  }
-
-  editInspection(idPrzeglad: number, dokument: string): Observable<Inspection> {
+  editCorrectInspection(idPrzeglad: number, dokument: string): Observable<Inspection> {
     let body = { IdPrzeglad: idPrzeglad, Dokument: dokument };
 
     return this.http.patch<Inspection>(this.inspectionsUrl, body)
       .pipe(
-        tap(() => alert('Dokument przeglądu zaktualizowany pomyślnie.')),
-        catchError(this.handleError<Inspection>('editInspection'))
+        tap(() => alert('Poprawny dokument przeglądu przesłany pomyślnie.')),
+        catchError(this.handleError<Inspection>('editCorrectInspection'))
       );
   }
 

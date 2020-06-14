@@ -1,22 +1,16 @@
 <mat-toolbar color="primary">
     <span class="menu-spacer">
         <div>
-            <a mat-button (click)="selectTab(0)">Maszyny</a>
-            <a mat-button (click)="selectTab(1)">Rodzaje maszyn</a>
-            <a mat-button (click)="selectTab(2)">Wnioski</a>
-            <a mat-button (click)="selectTab(3)">Definicje zadań przeglądowych</a>
-            <a mat-button (click)="selectTab(4)">Zadania przeglądowe</a>
+            <a mat-button (click)="selectTab(0)">Wnioski</a>
+            <a mat-button (click)="selectTab(1)">Definicje zadań przeglądowych</a>
+            <a mat-button (click)="selectTab(2)">Zadania przeglądowe</a>
+            <a mat-button (click)="selectTab(3)">Maszyny</a>
+            <a mat-button (click)="selectTab(4)">Rodzaje maszyn</a>
         </div>
     </span>
 </mat-toolbar>
 
 <div class="role-content">
-    <div *ngIf="selectedTab === 'machines'">
-        <app-machines></app-machines>
-    </div>
-    <div *ngIf="selectedTab === 'machine-types'">
-        <app-machine-types></app-machine-types>
-    </div>
     <div *ngIf="selectedTab === 'applications'">
         <app-applications></app-applications>
     </div>
@@ -25,5 +19,11 @@
     </div>
     <div *ngIf="selectedTab === 'inspections'">
         <app-inspections></app-inspections>
+    </div>
+    <div *ngIf="selectedTab === 'machines'">
+        <app-machines></app-machines>
+    </div>
+    <div *ngIf="selectedTab === 'machine-types'">
+        <app-machine-types></app-machine-types>
     </div>
 </div>

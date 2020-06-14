@@ -7,7 +7,7 @@
   
     <ng-container matColumnDef="IdRodzajMaszyny">
         <th mat-header-cell *matHeaderCellDef>Rodzaj maszyny</th>
-        <td mat-cell *matCellDef="let element">{{element.IdRodzajMaszyny}}</td>
+        <td mat-cell *matCellDef="let element">{{element.IdRodzajMaszyny | machineTypeName:machineTypes}}</td>
     </ng-container>
   
     <ng-container matColumnDef="Rejestracja">
@@ -29,7 +29,7 @@
         <th mat-header-cell *matHeaderCellDef>Weryfikacja zdatności</th>
         <td mat-cell *matCellDef="let element">
             <div *ngIf="!element.CzyZdatny">
-                <button mat-icon-button color="primary" aria-label="Oznacz jako niezdatny do eksploatacji" (click)="setAsUnoperable(element.IdMaszyna)">
+                <button mat-icon-button color="primary" aria-label="Oznacz jako niezdatny do eksploatacji" (click)="setAsUnoperable(element.IdMaszyna, element.IdWniosek)">
                     <mat-icon>highlight_off</mat-icon>
                 </button>
             </div>

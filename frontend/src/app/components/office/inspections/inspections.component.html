@@ -24,24 +24,52 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
-<mat-card>
-    <mat-card-title>Dokument zadania przeglądowego</mat-card-title>
-    <mat-error *ngIf="inspectionSendingFailed">Przesłanie dokumentu nie powiodło się!</mat-error>
-    <mat-card-content>
-        <form [formGroup]="inspectionForm" (ngSubmit)="onSubmit()">
-            <mat-form-field class="full-width-input">
-                <mat-select placeholder="Rejestracja maszyny" formControlName="machine" required>
-                    <mat-option *ngFor="let type of machines" value="{{ type.IdMaszyna }}">{{ type.Rejestracja }}</mat-option>
-                </mat-select>
-                <mat-error>Wybierz rejestrację maszyny</mat-error>
-            </mat-form-field>
-            <mat-form-field class="full-width-input">
-                <textarea matInput placeholder="Treść dokumentu..." formControlName="inspectionDocument" required></textarea>
-                <mat-error>Napisz treść dokumentu</mat-error>
-            </mat-form-field>
-            <button mat-raised-button color="primary">
-                Prześlij dokument
-            </button>
-        </form>
-    </mat-card-content>
-</mat-card>
+<mat-grid-list cols="2">
+    <mat-grid-tile>
+        <mat-card>
+            <mat-card-title>Wypełniony dokument zadania przeglądowego</mat-card-title>
+            <mat-error *ngIf="inspectionCorrectSendingFailed">Przesłanie dokumentu nie powiodło się!</mat-error>
+            <mat-card-content>
+                <form [formGroup]="inspectionCorrectForm" (ngSubmit)="onSubmitCorrect()">
+                    <mat-form-field class="full-width-input">
+                        <mat-select placeholder="Numer przeglądu" formControlName="inspection" required>
+                            <mat-option *ngFor="let type of inspections" value="{{ type }}">{{type.IdPrzeglad}}</mat-option>
+                        </mat-select>
+                        <mat-error>Wybierz rejestrację maszyny</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="full-width-input">
+                        <textarea matInput placeholder="Treść dokumentu..." formControlName="inspectionDocument" required></textarea>
+                        <mat-error>Napisz treść dokumentu</mat-error>
+                    </mat-form-field>
+                    <button mat-raised-button color="primary">
+                        Prześlij dokument
+                    </button>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <mat-card>
+            <mat-card-title>Dokument zadania przeglądowego</mat-card-title>
+            <mat-error *ngIf="newInspectionSendingFailed">Przesłanie dokumentu nie powiodło się!</mat-error>
+            <mat-card-content>
+                <form [formGroup]="newInspectionForm" (ngSubmit)="onSubmitNew()">
+                    <mat-form-field class="full-width-input">
+                        <mat-select placeholder="Rejestracja maszyny" formControlName="machine" required>
+                            <mat-option *ngFor="let type of machines" value="{{ type }}">{{ type.Rejestracja }}</mat-option>
+                        </mat-select>
+                        <mat-error>Wybierz numer przeglądu</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="full-width-input">
+                        <textarea matInput placeholder="Treść dokumentu..." formControlName="inspectionDocument" required></textarea>
+                        <mat-error>Napisz treść dokumentu</mat-error>
+                    </mat-form-field>
+                    <button mat-raised-button color="primary">
+                        Prześlij dokument
+                    </button>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>

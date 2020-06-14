@@ -1,26 +1,72 @@
-<mat-card>
-    <mat-card-title>Wniosek</mat-card-title>
-    <mat-card-subtitle>o przeprowadzenie przeglądu maszyny budowlanej</mat-card-subtitle>
-    <mat-error *ngIf="applicationSendingFailed">Przesłanie wniosku nie powiodło się!</mat-error>
-    <mat-card-content>
-        <form [formGroup]="applicationForm" (ngSubmit)="onSubmit()">
-            <mat-form-field class="full-width-input">
-                <mat-select placeholder="Rodzaj maszyny" formControlName="machineType" required>
-                    <mat-option *ngFor="let type of machineTypes" value="{{ type.IdRodzajMaszyny }}">{{ type.Nazwa }}</mat-option>
-                </mat-select>
-                <mat-error>Wybierz rodzaj maszyny</mat-error>
-            </mat-form-field>
-            <mat-form-field class="full-width-input">
-                <input matInput type="text" placeholder="Numer rejestracyjny maszyny" formControlName="licenseNumber" required>
-                <mat-error>Podaj numer rejestracyjny maszyny</mat-error>
-            </mat-form-field>
-            <mat-form-field class="full-width-input">
-                <textarea matInput placeholder="Treść wniosku..." formControlName="content" required></textarea>
-                <mat-error>Napisz treść wniosku</mat-error>
-            </mat-form-field>
-            <button mat-raised-button color="primary">
-                Złóz wniosek
-            </button>
-        </form>
-    </mat-card-content>
-</mat-card>
+<mat-toolbar color="primary">
+    <span class="menu-spacer">
+        <div>
+            <a mat-button (click)="selectTab(0)">Twoje wnioski</a>
+            <a mat-button (click)="selectTab(1)">Utwórz nowy wniosek</a>
+        </div>
+    </span>
+</mat-toolbar>
+
+<div class="role-content">
+    <div *ngIf="selectedTab === 'applications'">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="IdWniosek">
+                <th mat-header-cell *matHeaderCellDef>Numer wniosku</th>
+                <td mat-cell *matCellDef="let element">{{element.IdWniosek}}</td>
+            </ng-container>
+        
+            <ng-container matColumnDef="RodzajMaszyny">
+                <th mat-header-cell *matHeaderCellDef>Rodzaj maszyny</th>
+                <td mat-cell *matCellDef="let element">{{element.IdRodzajMaszyny | machineTypeName:machineTypes}}</td>
+            </ng-container>
+        
+            <ng-container matColumnDef="Rejestracja">
+                <th mat-header-cell *matHeaderCellDef>Rejestracja</th>
+                <td mat-cell *matCellDef="let element">{{element.Rejestracja}}</td>
+            </ng-container>
+        
+            <ng-container matColumnDef="Tresc">
+                <th mat-header-cell *matHeaderCellDef>Treść</th>
+                <td mat-cell *matCellDef="let element">{{element.Tresc}}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="Status">
+                <th mat-header-cell *matHeaderCellDef>Status</th>
+                <td mat-cell *matCellDef="let element">{{element.Status}}</td>
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+
+    <div *ngIf="selectedTab === 'new-application'">
+        <mat-card>
+            <mat-card-title>Wniosek</mat-card-title>
+            <mat-card-subtitle>o przeprowadzenie przeglądu maszyny budowlanej</mat-card-subtitle>
+            <mat-error *ngIf="applicationSendingFailed">Przesłanie wniosku nie powiodło się!</mat-error>
+            <mat-card-content>
+                <form [formGroup]="applicationForm" (ngSubmit)="onSubmit()">
+                    <mat-form-field class="full-width-input">
+                        <mat-select placeholder="Rodzaj maszyny" formControlName="machineType" required>
+                            <mat-option *ngFor="let type of machineTypes" value="{{ type.IdRodzajMaszyny }}">{{ type.Nazwa }}</mat-option>
+                        </mat-select>
+                        <mat-error>Wybierz rodzaj maszyny</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="full-width-input">
+                        <input matInput type="text" placeholder="Numer rejestracyjny maszyny" formControlName="licenseNumber" required>
+                        <mat-error>Podaj numer rejestracyjny maszyny</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="full-width-input">
+                        <textarea matInput placeholder="Treść wniosku..." formControlName="content" required></textarea>
+                        <mat-error>Napisz treść wniosku</mat-error>
+                    </mat-form-field>
+                    <button mat-raised-button color="primary">
+                        Złóz wniosek
+                    </button>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

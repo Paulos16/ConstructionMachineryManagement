@@ -5,4 +5,5 @@ export interface Application {
     CzyPoprawny: boolean;
     IdRodzajMaszyny: number;
     IdZleceniaDefinicji: number;
+    Status: string;
 }

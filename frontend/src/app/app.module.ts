@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -63,6 +64,7 @@ import { MachineTypesComponent } from './components/office/machine-types/machine
     MatSelectModule,
     MatTableModule,
     MatCheckboxModule,
+    MatGridListModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
