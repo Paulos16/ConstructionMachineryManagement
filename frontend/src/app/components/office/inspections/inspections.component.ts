@@ -58,7 +58,7 @@ export class InspectionsComponent implements OnInit {
   }
 
   getMachines(): void {
-    this.machinesService.getMachines(formatDate(new Date(), 'yyyy-MM-dd', 'en'))
+    this.machinesService.getMachines('null')
       .subscribe(machines => this.machines = machines);
   }
 
@@ -77,7 +77,6 @@ export class InspectionsComponent implements OnInit {
 
     let ymd = formatDate(new Date(), 'yyyy-MM-dd', 'en').split('-');
     let yearAfter = String(parseInt(ymd[0]) + 1) + '-' + ymd[1] + '-' + ymd[2];
-    console.log(yearAfter);
     this.machinesService.editMachineNextInspection(
         this.inspectionCorrectForm.get('inspection').value[2],
         yearAfter

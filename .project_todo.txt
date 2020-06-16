@@ -1,0 +1,6 @@
+Backend:
+
+Frontend:
+	- change binding names in html files (most are named
+		'type' because of copy - paste)
+

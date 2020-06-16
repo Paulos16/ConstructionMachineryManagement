@@ -42,7 +42,7 @@ export class MachinesService {
   }
 
   editMachineNextInspection(idMaszyna: number, terminNastepnegoPrzegladu: string): Observable<Machine> {
-    let body = { IdMaszyna: idMaszyna, TerminNastepnegoPrzegladu: terminNastepnegoPrzegladu };
+    let body = { IdMaszyna: idMaszyna, TerminWaznosciPrzegladu: terminNastepnegoPrzegladu };
 
     return this.http.post<Machine>(this.machinesUrl, body)
       .pipe(
