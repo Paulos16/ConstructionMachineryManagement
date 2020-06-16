@@ -49,10 +49,11 @@ module.exports = function() {
 
     const machine = db.get('machines')
       .filter((m) => m.IdMaszyna === machineId)
+      .first()
       .value();
     
     machine.TerminWaznosciPrzegladu = nextDate;
-
+    
     db.write();
 
     return machine;
