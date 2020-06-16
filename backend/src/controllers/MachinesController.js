@@ -62,7 +62,7 @@ module.exports.setNextOverviewDate = function(req, res, next) {
 
   if(!(req.body !== undefined &&
     req.body.IdMaszyna !== undefined &&
-    req.body.TerminNastepnegoPrzegladu !== undefined)) {
+    req.body.TerminWaznosciPrzegladu !== undefined)) {
     
     res.send(400);
     next();
@@ -70,7 +70,7 @@ module.exports.setNextOverviewDate = function(req, res, next) {
   }
 
   const service = new MachinesService();
-  const result = service.setNextOverviewDate(req.body.IdMaszyna, req.body.TerminNastepnegoPrzegladu);
+  const result = service.setNextOverviewDate(req.body.IdMaszyna, req.body.TerminWaznosciPrzegladu);
   
   res.send(200, result);
   next();
