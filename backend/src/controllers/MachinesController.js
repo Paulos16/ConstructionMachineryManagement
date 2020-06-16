@@ -70,7 +70,7 @@ module.exports.setNextOverviewDate = function(req, res, next) {
   }
 
   const service = new MachinesService();
-  const result = service.setNextOverviewDate(req.body.IdMaszyna, req.body.TerminWaznosciPrzegladu);
+  const result = service.setNextOverviewDate(Number(req.body.IdMaszyna), req.body.TerminWaznosciPrzegladu);
   
   res.send(200, result);
   next();
