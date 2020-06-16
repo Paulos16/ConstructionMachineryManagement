@@ -81,7 +81,7 @@ module.exports.addCorrectOverview = function(req, res, next) {
   }
 
   const service = new OverviewsService();
-  const result = service.addCorrectOverview(req.body.IdPrzeglad, req.body.Dokument);
+  const result = service.addCorrectOverview(Number(req.body.IdPrzeglad), req.body.Dokument);
   
   res.send(200, result);
   next();
