@@ -45,6 +45,9 @@ export class ApplicationsService {
   editApplicationStatus(idWniosek: number, status: string): Observable<Application> {
     let body = { IdWniosek: idWniosek, Status: status };
 
+    //OTUTAJ
+    // ostatni request, ktory wywala errorem,
+    // pewnie dlatego, ze pierwszy sie psuje, ale trzeba sprawdzic
     return this.http.post<Application>(this.applicationsUrl, body)
       .pipe(
         tap(() => alert('Zmieniono status wniosku na ' + status + '.')),

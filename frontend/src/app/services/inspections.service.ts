@@ -34,6 +34,8 @@ export class InspectionsService {
   editCorrectInspection(idPrzeglad: number, dokument: string): Observable<Inspection> {
     let body = { IdPrzeglad: idPrzeglad, Dokument: dokument };
 
+    // OTUTAJ
+    // pierwszy request ktory wywala errorem, podobno dokument jest undefined?
     return this.http.patch<Inspection>(this.inspectionsUrl, body)
       .pipe(
         tap(() => alert('Poprawny dokument przeglądu przesłany pomyślnie.')),

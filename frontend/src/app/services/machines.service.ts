@@ -44,6 +44,9 @@ export class MachinesService {
   editMachineNextInspection(idMaszyna: number, terminNastepnegoPrzegladu: string): Observable<Machine> {
     let body = { IdMaszyna: idMaszyna, TerminNastepnegoPrzegladu: terminNastepnegoPrzegladu };
 
+    //OTUTAJ
+    // to jest drugi w kolejnosci request, ktory wywala
+    // pewnie przez to, ze pierwszy wywala, ale tez trzeba sprawdzic
     return this.http.post<Machine>(this.machinesUrl, body)
       .pipe(
         tap(() => alert('Termin następnego przeglądu maszyny zaplanowany pomyślnie.')),
