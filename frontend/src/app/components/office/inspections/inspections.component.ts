@@ -69,7 +69,9 @@ export class InspectionsComponent implements OnInit {
       this.inspectionCorrectSendingFailed = true;
       return;
     }
-
+    
+    //OTUTAJ
+    // tutaj wysylam requesty po wprowadzeniu poprawnego przegladu (overview)
     this.inspectionsService.editCorrectInspection(
       this.inspectionCorrectForm.get('inspection').value[0],
       this.inspectionCorrectForm.get('inspectionDocument').value
@@ -87,6 +89,8 @@ export class InspectionsComponent implements OnInit {
           this.inspectionCorrectForm.get('inspection').value[4],
           'Przegląd zakończony pomyślnie'
         ).subscribe();
+    
+    //DO TEGO MIEJSCA REQUESTY SIE JEBIO
   }
 
   onSubmitNew() {
