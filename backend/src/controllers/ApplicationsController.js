@@ -48,7 +48,7 @@ module.exports.setApplicationApproval = function(req, res, next) {
   }
 
   const service = new ApplicationsService();
-  const result = service.setApplicationApproval(req.body.IdWniosek, req.body.CzyPoprawny);
+  const result = service.setApplicationApproval(Number(req.body.IdWniosek), req.body.CzyPoprawny);
 
   if( result === null) {
     res.send(406);

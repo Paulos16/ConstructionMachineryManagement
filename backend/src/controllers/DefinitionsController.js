@@ -77,7 +77,7 @@ module.exports.addDefinitionDocument = function(req, res, next) {
   }
 
   const service = new DefinitionsService();
-  const result = service.addDefinitionDocument(req.body.IdRodzajMaszyny, req.body.Dokument);
+  const result = service.addDefinitionDocument(Number(req.body.IdRodzajMaszyny), req.body.Dokument);
 
   if( result === null) {
     res.send(406);
