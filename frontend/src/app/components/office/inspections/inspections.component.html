@@ -30,7 +30,6 @@
             <mat-card-title>Wypełniony dokument zadania przeglądowego</mat-card-title>
             <mat-error *ngIf="inspectionCorrectSendingFailed">Przesłanie dokumentu nie powiodło się!</mat-error>
             <mat-card-content>
-                <!-- TUTAJ JEST TEGO FORMULARZ -->
                 <form [formGroup]="inspectionCorrectForm" (ngSubmit)="onSubmitCorrect()">
                     <mat-form-field class="full-width-input">
                         <mat-select placeholder="Numer przeglądu" formControlName="inspection" required>
@@ -46,7 +45,6 @@
                         Prześlij dokument
                     </button>
                 </form>
-                <!-- I TUTAJ SIE KONCZY -->
             </mat-card-content>
         </mat-card>
     </mat-grid-tile>
