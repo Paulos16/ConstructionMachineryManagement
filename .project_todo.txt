@@ -1,6 +1,10 @@
 Backend:
+	- change database to a more persisting variant
+	- delete moment package, replace usage with a different
+		method of generating and parsing dates
+	- delete shortid package, replace usage with a different
+		method of manipulating ids
 
 Frontend:
 	- change binding names in html files (most are named
 		'type' because of copy - paste)
-
